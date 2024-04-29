@@ -76,7 +76,7 @@ def generate_cards(csv_path: PathLike) -> list[CardData]:
                 data_row['Quantity'],
                 data_row['Trade Quantity'],
                 data_row['Card Name'],
-                data_row['Set Code'],
+                set_code_adjustment(data_row['Set Code']),
                 data_row['Set Name'],
                 data_row['Card Number'],
                 condition_map[data_row['Condition']],
@@ -87,6 +87,12 @@ def generate_cards(csv_path: PathLike) -> list[CardData]:
             retval.append(card)
 
     return retval
+
+def set_code_adjustment(setcode: str) -> str:
+    if(setcode == 'MB1'):
+        return 'CMB1'
+
+    return setcode
 
 
 def convert(in_path: PathLike, out_path: PathLike) -> None:
